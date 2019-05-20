@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>KnapSnack</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    <script src="jquery-ui.min.js"></script>
+  </head>
+  
+  <body>
+  
+    <h1 style="font-size:60px; margin: 0;"><img src="backpack.png" alt="Backpack icon" style="width: 2%; height: auto">KnapSnack</h1>	
+
+    <div id="leftContainer" class="card">
+    	<div class="history">	   	
+			<label for="history">Choose from previous searches</label>
+			<select name="history" id="historyMenu">
+
+			</select><br /> <br />
+		</div>    
+
+    	<form  id="restaurantForm" action="/userqueries/addquery" method="post">
+		How far are you willing to travel (in meters): 
+	      	<div id="radValue" style="display: inline;">500m</div>
+	      	<div class="slidecontainer" style="display: inline; padding-top: 5%;">
+	                <input type="range" min="10" max="10000" value="100" class="slider" id="radiusRange" name="radius" <%=userqueries[i].radius; %>
+	        </div>
+			<br />
+	      	Budget (per person): <div id="priceValue" style="display: inline;">$10</div>
+			<div id="priceText" style="width: 25%; display: inline;"> </div>
+			<div class="slidecontainer" style="display: inline; padding-top: 5%; padding-bottom: 5%">
+	  			<input type="range" min="1" max="100" value="10" class="slider" id="budgetRange" name="budget" <%=userqueries[i].budget; %>
+			</div>
+			<br />
+	        <div class='keywordSearchContainer'>
+	          Enter any keywords for restaurants below: ex) Chinese, Italian  
+	          <input style="display: inline;" type="text" id="keyword" value="" name="keyword" <%=userqueries[i].keyword; %>
+	        </div>
+	    	<div class='hidden'>
+				<input type="text" value="" id="longitude" value="44.66" name="longitude"<%=userqueries[i].longitude; %>
+				<input type="text" value="" id="latitude" value="77.33"  name="latitude" <%=userqueries[i].latitude; %>
+			</div>
+			
+	        <button type="submit" onclick="findNearbyRestaraunts()">Submit</button>
+			<br />
+			<input type="checkbox" id="tOS" name="tOS" checked=true required> <p style="display: inline;">* I acknowledge that my data will be collected upon submission</p>
+			<br />
+    	</form>
+	</div>      
+
+	<div id="rightContainer" class="card">
+    	<table>
+	      <tbody id="resContainer">
+	        
+	      </tbody>
+	    </table>
+    </div>
+
+	<div id="mapContainer" class="card">
+	    <section id="map"> </section>
+	</div>
+
+    <script src="index.js"></script> 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5xiQlaI8uYOM9V2e6jPmtPZ1KoC0Y_YY&libraries=places&callback=initMap"
+    async defer></script>
+  </body>
+</html>
